@@ -1,0 +1,13 @@
+[Unit]
+Description=XRPL validator stats client
+After=network.target
+
+[Service]
+User=USER
+Group=USER
+Type=simple
+ExecStart=/home/USER/virtualenv/bin/python /home/USER/virtualenv/mon/status_monitor.py
+
+
+[Install]
+WantedBy=multi-user.target

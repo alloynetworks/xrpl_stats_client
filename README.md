@@ -1,7 +1,7 @@
 # xrpl_stats_client
 Python client for XRPL validator statistics
 
-Prototype client that submits stats related to the `rippled` daemon, along with other system related information.
+Prototype client that submits stats related to the `rippled` daemon, along with other system related information to an **Endpoint**
 
 This client has been tested on Python 3.6, and will not work on Python 3.5 and below.
 

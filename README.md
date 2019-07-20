@@ -34,4 +34,5 @@ Future methods will include a `configtest`
 The script will **always** return a JSON, even if the `rippled` daemon isn't running. It wil return a key/value `"Error" : true"`, in that event, but system information will continue to be present.
 
 **TODO**
+
 Additional error trapping and handling of SIGINT.

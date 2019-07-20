@@ -27,11 +27,11 @@ The script has a few command line methods:
 
 `python status_monitor.py gensecret` will generate a random secret, which should be stored in the `monitor.ini` file. It is recommended that you use this, to ensure a random secret.
 
-`python status_monitor.py testmode` will not send data to the endpoint, but print the Header and the JSON payload to the screen.
+`python status_monitor.py testmode` will not send data to the endpoint, but print the Header and the JSON payload to the screen. **It is recommended that this mode is run initially to debug errors in output**
 
 Future methods will include a `configtest`
 
-The script will **always** return a JSON, even if the `rippled` daemon isn't running. It wil return a key/value `"Error" : true", in that event, but system information will continue to be present.
+The script will **always** return a JSON, even if the `rippled` daemon isn't running. It wil return a key/value `"Error" : true"`, in that event, but system information will continue to be present.
 
 **TODO**
 Additional error trapping and handling of SIGINT.

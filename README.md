@@ -7,14 +7,16 @@ This client has been tested on Python 3.6, and will not work on Python 3.5 and b
 
 It is recommended that this client be run under a separate Virtual Environment. It can only be run on the machine where the `rippled` validator is installed.
 
-Module requirements are published in `requirements.txt`. A sample systemd file is also provided, and can be modified to suit requirements. There are editable parameters in the `monitor.ini' file, and careful attention must be paid to them.
+Module requirements are published in `requirements.txt`. A sample systemd file is also provided, and can be modified to suit requirements. There are editable parameters in the `monitor.ini` file, and careful attention must be paid to them.
 
 The mandatory parameters are:
+```
 [default]
 endpoint = THE HTTP ENDPOINT
+
 [credentials]
 secret = YOURSECRET
-
+```
 Status reports are published in JSON, with a header containing the SHA256 hash of the payload. The hash is based on the shared secret which is defined in the key `secret`.
 
 The script has a few command line methods:

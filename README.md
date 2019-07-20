@@ -9,6 +9,8 @@ It is recommended that this client be run under a separate Virtual Environment. 
 
 Module requirements are published in `requirements.txt`. A sample systemd file is also provided, and can be modified to suit requirements. There are editable parameters in the `monitor.ini` file, and careful attention must be paid to them.
 
+**Note:** If you are using the systemd service, then you need to edit `status_monitor.py` and set the full path of the `monitor.ini` file. Relative paths will not work.
+
 The mandatory parameters are:
 ```
 [default]

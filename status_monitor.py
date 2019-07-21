@@ -12,6 +12,7 @@ import configparser
 import sys
 import requests
 import secrets
+import distro
 from hashit import make_hash
 
 #Provide full path to the file if you are using a systemd service 
@@ -165,8 +166,10 @@ def get_info():
    data['system'].append({'timestamp_epoch' : round(time.time(),0)})        
    data['system'].append({'swap_used_gb': round(psutil.swap_memory().used/1024/1024/1024,2)})
    data['system'].append({'iowait%' : psutil.cpu_times_percent().iowait})
+   osinfo = distro.info()
+   data['system'].append({'os_info': osinfo})
    data['system'].append({'stats_interval' : interval})
-
+   
    
    return data
 

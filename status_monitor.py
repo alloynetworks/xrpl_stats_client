@@ -133,7 +133,10 @@ def get_info():
       data['error'] = False     
       #Rippled info
       data['rippled'].append({'domain_stated': domain})
-      data['rippled'].append({'state': jstr['result']['info']['server_state']})
+
+      server_state = jstr['result']['info']['server_state']
+
+      data['rippled'].append({'state': server_state})
       data['rippled'].append({'version': jstr['result']['info']['build_version']})
       data['rippled'].append({'uptime': jstr['result']['info']['uptime']})
       data['rippled'].append({'complete_ledgers': jstr['result']['info']['complete_ledgers']})
@@ -143,6 +146,7 @@ def get_info():
       data['rippled'].append({'validation_quorum': jstr['result']['info']['validation_quorum']})
       data['rippled'].append({'validator_list_expiration': jstr['result']['info']['validator_list']['expiration'].split(" ")[0]})
       data['rippled'].append({'pubkey_validator': jstr['result']['info']['pubkey_validator']})
+
       #These two entries may not always be present
       try:
          data['rippled'].append({'validated_ledger_hash': jstr['result']['info']["validated_ledger"]["hash"]})
@@ -153,7 +157,13 @@ def get_info():
       except:
          data['rippled'].append({'validated_ledger_age': "Unknown"})
 
-      data['rippled'].append({'proposers': jstr['result']['info']["last_close"]["proposers"]})
+      numproposers = jstr['result']['info']["last_close"]["proposers"]
+
+      data['rippled'].append({'proposers': numproposers})
+
+      if numproposers == 0 or server_state != 'proposing':
+          data['error'] = True
+          
 
    #System information   
 
@@ -166,10 +176,9 @@ def get_info():
    data['system'].append({'timestamp_epoch' : round(time.time(),0)})        
    data['system'].append({'swap_used_gb': round(psutil.swap_memory().used/1024/1024/1024,2)})
    data['system'].append({'iowait%' : psutil.cpu_times_percent().iowait})
+   data['system'].append({'stats_interval' : interval})
    osinfo = distro.info()
    data['system'].append({'os_info': osinfo})
-   data['system'].append({'stats_interval' : interval})
-   
    
    return data
 

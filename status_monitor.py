@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import asyncio
-import websockets
+from websocket import create_connection
 import json
 import psutil
 import os
@@ -15,7 +14,7 @@ import secrets
 import distro
 from hashit import make_hash
 
-#Provide full path to the file if you are using a systemd service 
+#Provide full path, if you are using a systemd service 
 conf_file = 'monitor.ini'
 
 # DO NOT EDIT BELOW THIS LINE UNLESS YOU KNOW WHAT YOU ARE DOING :)
@@ -95,28 +94,29 @@ else:
 
 
 
-@asyncio.coroutine
 def fdata():
-     
-    websocket = yield from websockets.connect(
-            'ws://localhost:'+ ws_port)
+    
+    try: 
+       wsock = create_connection(
+            'ws://localhost:' + ws_port)
 
-
+    except:
+       return False
+    
     try:
        
        peerq = {"command" : "server_info"}
-       yield from websocket.send(json.dumps(peerq))
+       wsock.send(json.dumps(peerq))
         
 
-       resp = yield from websocket.recv()
+       resp = wsock.recv()
        return resp
        
     except:
        return False 
 
     finally:
-        yield from websocket.close()
-        
+        wsock.close()
 
 
 def get_info():
@@ -124,7 +124,8 @@ def get_info():
            'rippled' : [],
            'system' : []
           }
-   jstr = asyncio.get_event_loop().run_until_complete(fdata())
+
+   jstr = fdata()
 
    if jstr == False:
       data['error'] = True

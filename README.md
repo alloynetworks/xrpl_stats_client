@@ -7,7 +7,7 @@ This client has been tested on Python 3.5 and 3.6
 
 It is recommended that this client be run under a separate Virtual Environment (venv). It can only be run on the machine where the `rippled` validator is installed.
 
-Module requirements are published in `requirements.txt`. A sample systemd file is also provided, and can be modified to suit requirements.
+Module requirements are published in `requirements.txt` (`pip install -r requirements.txt`). A sample systemd file is also provided, and can be modified to suit requirements.
 
 **Note:** If you are using the systemd service, then you need to edit `status_monitor.py` and set the full path of the `monitor.ini` file. Relative paths will not work.
 
